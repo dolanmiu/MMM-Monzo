@@ -5,7 +5,7 @@
 [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 <p align="center">
-   <img src="https://user-images.githubusercontent.com/2917613/39732681-b1ff33a0-5266-11e8-8c6e-d334811f1f2c.png" height="300">
+   <img src="https://user-images.githubusercontent.com/2917613/39732681-b1ff33a0-5266-11e8-8c6e-d334811f1f2c.png" height="195">
 <p>
 
 # MMM-Monzo
