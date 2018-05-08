@@ -1,0 +1,41 @@
+{
+    "name": "mmm-monzo",
+    "version": "1.0.0",
+    "description": "Monzo module for Magic Mirror",
+    "main": "MMM-Monzo.js",
+    "scripts": {
+        "build": "webpack --progress --profile --bail --display-error-details",
+        "dev": "npm run build -- --watch --mode development",
+        "test": "npm run lint",
+        "electron-rebuild": "electron-rebuild --pre-gyp-fix",
+        "lint": "tslint --project .",
+        "node-pre-gyp": "node-pre-gyp clean configure build",
+        "spell": "cspell src/**/*.ts",
+        "style": "prettier -l src/**/*.ts",
+        "style:format": "prettier src/**/*.ts --write"
+    },
+    "author": "Dolan Miu",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dolanmiu/MMM-Monzo.git"
+    },
+    "dependencies": {
+        "electron-rebuild": "^1.5.7",
+        "request": "^2.85.0",
+        "request-promise": "^4.2.2"
+    },
+    "devDependencies": {
+        "@types/express": "^4.11.0",
+        "@types/node": "^10.0.3",
+        "@types/request-promise": "4.1.41",
+        "awesome-typescript-loader": "^3.4.1",
+        "cspell": "^2.0.4",
+        "prettier": "^1.12.1",
+        "tslint": "^5.1.0",
+        "typescript": "2.5.2",
+        "webpack": "^4.4.1",
+        "webpack-cli": "2.1.1",
+        "webpack-node-externals": "^1.6.0"
+    }
+}

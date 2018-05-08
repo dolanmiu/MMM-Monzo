@@ -1,0 +1,14 @@
+{
+    "version": "0.1",
+    "language": "en",
+    "words": [],
+    "flagWords": ["hte"],
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/**",
+        ".vscode",
+        "@types",
+        "resources"
+    ]
+}
