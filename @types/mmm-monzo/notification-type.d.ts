@@ -1,1 +1,1 @@
-declare type NotificationType = "config";
+type NotificationType = "config";
