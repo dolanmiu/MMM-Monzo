@@ -12,7 +12,6 @@ console.log();
 console.log("Things needed:");
 console.log("- Client ID");
 console.log("- Client Secret");
-console.log("- Allowed return URL");
 console.log("----------------------------------");
 
 async function doWork() {
