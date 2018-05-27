@@ -12,7 +12,8 @@
         "node-pre-gyp": "node-pre-gyp clean configure build",
         "spell": "cspell src/**/*.ts",
         "style": "prettier -l src/**/*.ts",
-        "style:format": "prettier src/**/*.ts --write"
+        "style:format": "prettier src/**/*.ts --write",
+        "token-helper": "node token-helper/token-helper.js"
     },
     "author": "Dolan Miu",
     "license": "MIT",
