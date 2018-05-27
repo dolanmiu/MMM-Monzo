@@ -3,7 +3,7 @@ const path = require("path");
 
 const clientConfig = {
     mode: "production",
-    entry: "./src/renderer/MMM-Monzo.ts",
+    entry: "./src/renderer/index.ts",
     output: {
         path: __dirname,
         filename: "MMM-Monzo.js",
