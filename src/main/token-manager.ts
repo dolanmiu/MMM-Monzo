@@ -8,7 +8,6 @@ export class TokenManager {
 
     constructor(private readonly config: Config) {
         this.currentRefreshToken = this.config.refreshToken;
-        this.writeNewRefreshToken("test");
 
         this.refreshAccess();
         setInterval(() => {
@@ -26,11 +25,14 @@ export class TokenManager {
                     client_secret: this.config.clientSecret,
                     refresh_token: this.currentRefreshToken,
                 },
+                json: true,
             },
         );
 
         this.currentRefreshToken = body.refresh_token;
         this.accessToken = body.access_token;
+        this.writeNewRefreshToken(this.currentRefreshToken);
+
         console.log(body);
         console.log(this.accessToken);
     }
@@ -45,6 +47,8 @@ export class TokenManager {
         const newConfigFile = configFile.replace(this.currentRefreshToken, newRefreshToken);
 
         fs.writeFileSync(configPath, newConfigFile, "utf-8");
+
+        console.log("Written new refresh token");
     }
 
     public get AccessToken(): string {

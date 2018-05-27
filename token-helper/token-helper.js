@@ -41,10 +41,11 @@ async function doWork() {
             client_secret: clientSecret,
             redirect_uri: redirectUri,
         },
+        json: true,
     });
 
     console.log("Here is your details:");
-    console.log(JSON.parse(body));
+    console.log(JSON.stringify(body, null, 2));
     console.log("Please copy the refresh_code into your MMM-Monzo config");
 }
 
