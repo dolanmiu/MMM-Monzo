@@ -9,9 +9,9 @@ export class TokenManager {
     constructor(private readonly config: Config) {
         this.currentRefreshToken = this.config.refreshToken;
 
-        this.refreshAccess();
+        this.refreshAccess().catch(console.error);
         setInterval(() => {
-            this.refreshAccess();
+            this.refreshAccess().catch(console.error);
         }, 21600000);
     }
 

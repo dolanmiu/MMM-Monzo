@@ -45,9 +45,12 @@ async function doWork() {
 
     console.log("Here is your details:");
     console.log(JSON.stringify(body, null, 2));
-    console.log("Please copy the refresh_code into your MMM-Monzo config");
+    console.log("Please copy the 'refresh_token' into your MMM-Monzo config");
 }
 
 doWork()
     .then(() => process.exit())
-    .catch(console.error);
+    .catch(err => {
+        console.error(err);
+        process.exit();
+    });
