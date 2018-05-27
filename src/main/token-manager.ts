@@ -29,6 +29,8 @@ export class TokenManager {
 
         this.currentRefreshToken = body.refresh_token;
         this.accessToken = body.access_token;
+        console.log(body);
+        console.log(this.accessToken);
     }
 
     public get AccessToken(): string {
