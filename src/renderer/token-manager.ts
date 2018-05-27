@@ -4,8 +4,11 @@ import { setInterval } from "timers";
 
 export class TokenManager {
     private accessToken: string;
+    private currentRefreshToken: string;
 
-    constructor(private config: Config, private refreshToken: string) {
+    constructor(private readonly config: Config) {
+        this.currentRefreshToken = this.config.refreshToken;
+
         this.refreshAccess();
         setInterval(() => {
             this.refreshAccess();
@@ -20,12 +23,12 @@ export class TokenManager {
                     grant_type: "refresh_token",
                     client_id: this.config.clientId,
                     client_secret: this.config.clientSecret,
-                    refresh_token: this.refreshToken,
+                    refresh_token: this.currentRefreshToken,
                 },
             },
         );
 
-        this.refreshToken = body.refresh_token;
+        this.currentRefreshToken = body.refresh_token;
         this.accessToken = body.access_token;
     }
 

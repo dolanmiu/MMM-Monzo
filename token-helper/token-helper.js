@@ -2,9 +2,16 @@ const prompt = require("./prompt");
 const request = require("request-promise");
 
 console.log("Welcome to the Monzo OAuth helper!");
+console.log("----------------------------------");
+console.log();
+console.log("- Be sure to create a 'Confidential' OAuth client in the Monzo Developer portal");
+console.log(
+    "- Be sure to set the return URL as 'http://localhost:8080/oauth' in the Monzo Developer portal",
+);
+console.log();
 console.log("Things needed:");
 console.log("- Client ID");
-console.log("- Product ID");
+console.log("- Client Secret");
 console.log("- Allowed return URL");
 console.log("----------------------------------");
 
@@ -38,6 +45,7 @@ async function doWork() {
 
     console.log("Here is your details:");
     console.log(JSON.parse(body));
+    console.log("Please copy the refresh_code into your MMM-Monzo config");
 }
 
 doWork()

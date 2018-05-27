@@ -1,8 +1,13 @@
+import { TokenManager } from "./token-manager";
+
+let tokenManager: TokenManager;
+
 Module.register("MMM-Monzo", {
     defaults: {},
 
     start(): void {
-        this.sendSocketNotification("CONFIG", this.config);
+        tokenManager = new TokenManager(this.config);
+        this.sendSocketNotification("config", this.config);
     },
 
     getDom(): HTMLElement {
