@@ -1,3 +1,9 @@
-interface Config {}
+interface Config {
+    clientId: string;
+    clientSecret: string;
+}
 
-interface UncheckedConfig {}
+interface UncheckedConfig {
+    clientId?: string;
+    clientSecret?: string;
+}
