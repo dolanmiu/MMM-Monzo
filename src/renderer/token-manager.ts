@@ -1,6 +1,5 @@
 // https://github.com/monzo/docs/blob/master/source/includes/_authentication.md
 import * as request from "request-promise";
-import { setInterval } from "timers";
 
 export class TokenManager {
     private accessToken: string;
