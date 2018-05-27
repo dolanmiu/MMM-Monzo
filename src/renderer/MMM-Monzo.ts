@@ -15,7 +15,7 @@ Module.register("MMM-Monzo", {
         return [this.file("styles/global.css")];
     },
 
-    socketNotificationReceived<T>(notification: any, payload: T): void {
+    socketNotificationReceived<T>(notification: NotificationType, payload: T): void {
         Log.log(this.name + " received a notification: " + notification + " - Payload: " + payload);
     },
 });
