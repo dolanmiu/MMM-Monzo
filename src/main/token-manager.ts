@@ -29,22 +29,19 @@ export class TokenManager {
             },
         );
 
-        this.currentRefreshToken = body.refresh_token;
         this.accessToken = body.access_token;
-        this.writeNewRefreshToken(this.currentRefreshToken);
-
-        console.log(body);
-        console.log(this.accessToken);
+        this.writeNewRefreshToken(this.currentRefreshToken, body.refresh_token);
+        this.currentRefreshToken = body.refresh_token;
     }
 
-    private writeNewRefreshToken(newRefreshToken: string): void {
-        if (this.currentRefreshToken) {
+    private writeNewRefreshToken(oldRefreshToken: string, newRefreshToken: string): void {
+        if (!oldRefreshToken) {
             throw Error("No Refresh Token");
         }
 
         const configPath = "./config/config.js";
         const configFile = fs.readFileSync(configPath, "utf-8");
-        const newConfigFile = configFile.replace(this.currentRefreshToken, newRefreshToken);
+        const newConfigFile = configFile.replace(oldRefreshToken, newRefreshToken);
 
         fs.writeFileSync(configPath, newConfigFile, "utf-8");
 
