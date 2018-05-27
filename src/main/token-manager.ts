@@ -1,4 +1,5 @@
 // https://github.com/monzo/docs/blob/master/source/includes/_authentication.md
+import * as fs from "fs";
 import * as request from "request-promise";
 
 export class TokenManager {
@@ -7,6 +8,7 @@ export class TokenManager {
 
     constructor(private readonly config: Config) {
         this.currentRefreshToken = this.config.refreshToken;
+        this.writeNewRefreshToken("test");
 
         this.refreshAccess();
         setInterval(() => {
@@ -31,6 +33,18 @@ export class TokenManager {
         this.accessToken = body.access_token;
         console.log(body);
         console.log(this.accessToken);
+    }
+
+    private writeNewRefreshToken(newRefreshToken: string): void {
+        if (this.currentRefreshToken) {
+            throw Error("No Refresh Token");
+        }
+
+        const configPath = "./config/config.js";
+        const configFile = fs.readFileSync(configPath, "utf-8");
+        const newConfigFile = configFile.replace(this.currentRefreshToken, newRefreshToken);
+
+        fs.writeFileSync(configPath, newConfigFile, "utf-8");
     }
 
     public get AccessToken(): string {
