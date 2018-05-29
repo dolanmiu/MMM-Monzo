@@ -21,6 +21,7 @@ export class MonzoFetcher {
             {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
+                    "Content-type": "application/json",
                 },
                 json: true,
             },

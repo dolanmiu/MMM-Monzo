@@ -1,8 +1,10 @@
 import * as NodeHelper from "node_helper";
 
+import { MonzoFetcher } from "./monzo-fetcher";
 import { TokenManager } from "./token-manager";
 
 let tokenManager: TokenManager;
+let fetcher: MonzoFetcher;
 
 module.exports = NodeHelper.create({
     start(): void {
@@ -10,10 +12,15 @@ module.exports = NodeHelper.create({
     },
 
     // tslint:disable-next-line:no-any
-    socketNotificationReceived(notification: NotificationType, payload: any): void {
+    async socketNotificationReceived(notification: NotificationType, payload: any): Promise<void> {
         switch (notification) {
             case "config":
-                tokenManager = new TokenManager(payload as Config);
+                const config = payload as Config;
+                tokenManager = new TokenManager(config);
+                fetcher = new MonzoFetcher(config.accountId);
+                const token = await tokenManager.AccessToken$;
+                const data = await fetcher.fetch(token);
+                console.log(data);
                 break;
         }
     },
