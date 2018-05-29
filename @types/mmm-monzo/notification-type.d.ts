@@ -1,1 +1,1 @@
-type NotificationType = "config";
+type NotificationType = "config" | "monzo-data";

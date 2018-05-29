@@ -15,7 +15,13 @@ Module.register("MMM-Monzo", {
         return [this.file("styles/global.css")];
     },
 
-    socketNotificationReceived<T>(notification: NotificationType, payload: T): void {
+    // tslint:disable-next-line:no-any
+    socketNotificationReceived(notification: NotificationType, payload: any): void {
         Log.log(this.name + " received a notification: " + notification + " - Payload: " + payload);
+        switch (notification) {
+            case "monzo-data":
+                console.log(payload);
+                break;
+        }
     },
 });
