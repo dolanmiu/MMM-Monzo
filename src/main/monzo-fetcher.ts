@@ -21,15 +21,14 @@ export class MonzoFetcher {
             {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
-                    "Content-type": "application/json",
                 },
                 json: true,
             },
         );
 
-        const lastTransactions = body.transactions.slice(
-            Math.max(body.transactions.length - 10, 0),
-        );
+        const lastTransactions = body.transactions
+            .slice(Math.max(body.transactions.length - 10, 0))
+            .reverse();
 
         return lastTransactions;
     }

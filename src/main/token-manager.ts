@@ -31,8 +31,6 @@ export class TokenManager {
             },
         );
 
-        console.log(body.refresh_token);
-
         this.writeNewRefreshToken(this.currentRefreshToken, body.refresh_token);
         this.currentRefreshToken = body.refresh_token;
         return body.access_token;
