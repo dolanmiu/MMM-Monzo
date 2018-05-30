@@ -24,13 +24,21 @@
 }
 
 .monzo-transactions {
-    background-color: red;
     top: 120px;
     bottom: 0;
     right: 0;
     left: 0;
     display: block;
     position: absolute;
+    overflow: hidden;
+}
+
+.monzo-transaction {
+    font-size: 16px;
+    text-align: left;
+    display: table;
+    width: 100%;
+    height: 40px;
 }
 
 .monzo-small {
@@ -38,8 +46,47 @@
     font-size: 12px;
 }
 
-.amounts {
+.monzo-amounts {
     font-weight: 100;
     font-size: 25px;
     margin: 0;
+}
+
+.monzo-transaction-logo {
+    display: table-cell;
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.monzo-transaction-description {
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.monzo-transaction-amount {
+    display: table-cell;
+    width: 50px;
+    height: 100%;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.monzo-transaction-description p,
+.monzo-transaction-amount p {
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.monzo-transaction-logo img {
+    width: 30px;
+    height: 30px;
+    line-height: 0;
+    border-radius: 30%;
+    overflow: hidden;
+    padding: 5px;
 }

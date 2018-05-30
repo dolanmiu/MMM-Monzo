@@ -20,7 +20,7 @@ export class MonzoFetcher {
         accessToken: string,
     ): Promise<MonzoTransaction[]> {
         const body: MonzoTransactionResponse = await request.get(
-            `https://api.monzo.com/transactions?account_id=${accountId}`,
+            `https://api.monzo.com/transactions?expand[]=merchant&account_id=${accountId}`,
             {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
