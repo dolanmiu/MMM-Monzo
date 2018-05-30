@@ -40,8 +40,12 @@ Module.register("MMM-Monzo", {
         let currentOpacity = 1;
 
         for (const transaction of transactions) {
+            const avatarUrl = `https://ui-avatars.com/api/?name=${
+                transaction.description
+            }&background=fff&color=000`;
+
             const transactionElement = createTransaction(
-                transaction.merchant ? transaction.merchant.logo : "",
+                transaction.merchant ? transaction.merchant.logo : avatarUrl,
                 transaction.merchant ? transaction.merchant.name : transaction.description,
                 `£${Math.abs(transaction.amount) / 100}`,
             );
@@ -112,11 +116,13 @@ function createTransactions(): HTMLElement {
 
 function createTransaction(logoString: string, text: string, amountString: string): HTMLElement {
     const image = document.createElement("img");
+    const imageP = document.createElement("p");
+    imageP.appendChild(image);
     image.setAttribute("src", logoString);
 
     const logo = document.createElement("div");
     logo.classList.add("monzo-transaction-logo");
-    logo.appendChild(image);
+    logo.appendChild(imageP);
 
     const descriptionText = document.createElement("p");
     descriptionText.innerText = text;

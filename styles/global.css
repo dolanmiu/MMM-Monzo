@@ -56,7 +56,7 @@
     display: table-cell;
     width: 40px;
     height: 40px;
-    background-color: blue;
+    /* background-color: blue; */
     vertical-align: middle;
     overflow: hidden;
 }
@@ -76,13 +76,14 @@
 }
 
 .monzo-transaction-description p,
-.monzo-transaction-amount p {
+.monzo-transaction-amount p,
+.monzo-transaction-logo p {
     line-height: 0;
     margin: 0;
     padding: 0;
 }
 
-.monzo-transaction-logo img {
+.monzo-transaction-logo p img {
     width: 30px;
     height: 30px;
     line-height: 0;
