@@ -3,13 +3,16 @@ import * as request from "request-promise";
 export class MonzoFetcher {
     constructor(private accountId: string) {}
 
-    public async fetch(accessToken: string): Promise<[MonzoTransaction[], MonzoBalanceResponse]> {
+    public async fetch(accessToken: string): Promise<MonzoData> {
         const transactions$ = this.fetchTransactions(this.accountId, accessToken);
         const balance$ = this.fetchBalance(this.accountId, accessToken);
 
         const [transactions, balance] = await Promise.all([transactions$, balance$]);
 
-        return [transactions, balance];
+        return {
+            transactions: transactions,
+            balance: balance,
+        };
     }
 
     private async fetchTransactions(

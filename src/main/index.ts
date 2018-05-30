@@ -28,7 +28,7 @@ module.exports = NodeHelper.create({
                 await this.fetch();
                 setInterval(() => {
                     this.fetch();
-                }, 5000);
+                }, 60000);
                 break;
         }
     },

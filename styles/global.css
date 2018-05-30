@@ -1,0 +1,45 @@
+.monzo-wrapper {
+    display: block;
+    width: 300px;
+    height: 500px;
+    position: relative;
+}
+
+.monzo-balance {
+    display: block;
+    position: absolute;
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+    text-align: left;
+}
+
+.monzo-spent-today {
+    display: block;
+    position: absolute;
+    text-transform: uppercase;
+    top: 0;
+    text-align: right;
+    right: 0;
+}
+
+.monzo-transactions {
+    background-color: red;
+    top: 120px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: block;
+    position: absolute;
+}
+
+.monzo-small {
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.amounts {
+    font-weight: 100;
+    font-size: 25px;
+    margin: 0;
+}
