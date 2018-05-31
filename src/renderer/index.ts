@@ -1,4 +1,6 @@
-let monzoData: MonzoData;
+import drawGraph from "./graph-renderer";
+
+let canvas: HTMLCanvasElement;
 
 Module.register("MMM-Monzo", {
     defaults: {},
@@ -13,6 +15,10 @@ Module.register("MMM-Monzo", {
         wrapper.appendChild(createBalance(""));
         wrapper.appendChild(createSpent(""));
         wrapper.appendChild(createTransactions());
+
+        canvas = document.createElement("canvas");
+        canvas.classList.add("monzo-canvas");
+        wrapper.appendChild(canvas);
 
         return wrapper;
     },
@@ -57,14 +63,18 @@ Module.register("MMM-Monzo", {
 
     // tslint:disable-next-line:no-any
     socketNotificationReceived(notification: NotificationType, payload: any): void {
-        Log.log(this.name + " received a notification: " + notification + " - Payload: " + payload);
+        Log.log(this.name + " received a notification: " + notification);
         switch (notification) {
             case "monzo-data":
                 const currentMonzoData = payload as MonzoData;
-                monzoData = payload;
+                const latsetTransactions = currentMonzoData.transactions
+                    .slice(Math.max(currentMonzoData.transactions.length - 10, 0))
+                    .reverse();
+
                 this.setBalance(`£${currentMonzoData.balance.balance / 100}`);
                 this.setSpentToday(`£${Math.abs(currentMonzoData.balance.spend_today) / 100}`);
-                this.setTransactions(currentMonzoData.transactions);
+                this.setTransactions(latsetTransactions);
+                drawGraph(canvas, currentMonzoData.transactions);
                 break;
         }
     },
