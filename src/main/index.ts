@@ -14,7 +14,6 @@ module.exports = NodeHelper.create({
     async fetch(): Promise<void> {
         const token = await tokenManager.AccessToken$;
         const data = await fetcher.fetch(token);
-        console.log(data);
         this.sendSocketNotification("monzo-data", data);
     },
 
