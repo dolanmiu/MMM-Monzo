@@ -22,6 +22,7 @@
         "url": "git+https://github.com/dolanmiu/MMM-Monzo.git"
     },
     "dependencies": {
+        "currency-formatter": "^1.4.2",
         "electron-rebuild": "^1.5.7",
         "request": "^2.85.0",
         "request-promise": "^4.2.2"
