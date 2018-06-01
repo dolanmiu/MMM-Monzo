@@ -1,3 +1,4 @@
+import { Currency } from "currency-formatter";
 import drawGraph from "./graph-renderer";
 
 let canvas: HTMLCanvasElement;
@@ -37,7 +38,7 @@ Module.register("MMM-Monzo", {
         element.innerText = value;
     },
 
-    setTransactions(transactions: MonzoTransaction[]): void {
+    setTransactions(transactions: MonzoTransaction[], currency: Currency): void {
         const element = document.getElementById("monzoTransactions");
 
         element.innerHTML = "";
@@ -51,9 +52,12 @@ Module.register("MMM-Monzo", {
             }&background=fff&color=000`;
 
             const transactionElement = createTransaction(
-                transaction.merchant ? transaction.merchant.logo : avatarUrl,
+                transaction.merchant && transaction.merchant.logo
+                    ? transaction.merchant.logo
+                    : avatarUrl,
                 transaction.merchant ? transaction.merchant.name : transaction.description,
-                `£${Math.abs(transaction.amount) / 100}`,
+                `${currency.symbol}${Math.abs(transaction.amount) /
+                    Math.pow(10, currency.decimalDigits)}`,
             );
             transactionElement.setAttribute("style", `opacity: ${currentOpacity}`);
             currentOpacity -= opacityDelta;
@@ -66,14 +70,22 @@ Module.register("MMM-Monzo", {
         Log.log(this.name + " received a notification: " + notification);
         switch (notification) {
             case "monzo-data":
+                console.log(payload);
                 const currentMonzoData = payload as MonzoData;
                 const latsetTransactions = currentMonzoData.transactions
                     .slice(Math.max(currentMonzoData.transactions.length - 10, 0))
                     .reverse();
 
-                this.setBalance(`£${currentMonzoData.balance.balance / 100}`);
-                this.setSpentToday(`£${Math.abs(currentMonzoData.balance.spend_today) / 100}`);
-                this.setTransactions(latsetTransactions);
+                this.setBalance(
+                    `${currentMonzoData.currency.symbol}${currentMonzoData.balance.balance /
+                        Math.pow(10, currentMonzoData.currency.decimalDigits)}`,
+                );
+                this.setSpentToday(
+                    `${currentMonzoData.currency.symbol}${Math.abs(
+                        currentMonzoData.balance.spend_today,
+                    ) / Math.pow(10, currentMonzoData.currency.decimalDigits)}`,
+                );
+                this.setTransactions(latsetTransactions, currentMonzoData.currency);
                 drawGraph(canvas, currentMonzoData.transactions);
                 break;
         }

@@ -55,6 +55,7 @@ export default function drawGraph(
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
 
+    // tslint:disable-next-line:no-any
     let oldXY: any = {};
 
     for (let i = 0; i < latsetTransactions.length; i++) {

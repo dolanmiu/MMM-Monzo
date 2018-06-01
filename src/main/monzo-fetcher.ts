@@ -1,3 +1,4 @@
+import { currencies } from "currency-formatter";
 import * as request from "request-promise";
 
 export class MonzoFetcher {
@@ -8,10 +9,12 @@ export class MonzoFetcher {
         const balance$ = this.fetchBalance(this.accountId, accessToken);
 
         const [transactions, balance] = await Promise.all([transactions$, balance$]);
+        const currency = currencies.find(c => c.code === balance.currency);
 
         return {
             transactions: transactions,
             balance: balance,
+            currency: currency,
         };
     }
 
@@ -30,7 +33,7 @@ export class MonzoFetcher {
         );
 
         const lastTransactions = body.transactions
-            .slice(Math.max(body.transactions.length - 10, 0))
+            .slice(Math.max(body.transactions.length - 30, 0))
             .reverse();
 
         return lastTransactions;
