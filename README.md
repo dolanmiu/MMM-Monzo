@@ -9,9 +9,9 @@
 
 # MMM-Monzo
 
-![screen shot 2018-06-02 at 20 55 28](https://user-images.githubusercontent.com/2917613/40880393-c7bfc31c-66a7-11e8-9d73-5ed949e74dbc.png)
-
 > Monzo Module for Magic Mirror
+
+![screen shot 2018-06-02 at 20 55 28](https://user-images.githubusercontent.com/2917613/40880393-c7bfc31c-66a7-11e8-9d73-5ed949e74dbc.png)
 
 ## Compatability
 
@@ -19,7 +19,7 @@
 | -------------------- | ------ | ----- |
 | Linux / Raspberry Pi | ✔      | -     |
 | macOS                | ✔      | -     |
-| Windows              | ✘      | -     |
+| Windows              | ✔      | -     |
 
 ## Installing
 
