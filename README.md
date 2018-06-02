@@ -31,16 +31,16 @@
 The final config should look something like this:
 
 ```js
-        {
-			module: "MMM-Monzo",
-			position: "top_center",
-			config: {
-				clientId: "oauth2client_00009XfHYT...",
-				clientSecret: "mnzconf.++er4iwMs4CtoYUdpRjpIn+UL6/NwqA88E...",
-				accountId: "acc_00005Ufdh...",
-				refreshToken: "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJl..."
-			}
+    {
+		module: "MMM-Monzo",
+		position: "top_center",
+		config: {
+			clientId: "oauth2client_00009XfHYT...",
+			clientSecret: "mnzconf.++er4iwMs4CtoYUdpRjpIn+UL6/NwqA88E...",
+			accountId: "acc_00005Ufdh...",
+			refreshToken: "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJl..."
 		}
+    }
 ```
 
 ### Getting the Client ID and Client Secret
