@@ -6,6 +6,26 @@ import { TokenManager } from "./token-manager";
 let tokenManager: TokenManager;
 let fetcher: MonzoFetcher;
 
+function checkConfig(config: UncheckedConfig): Config {
+    if (config.accountId === undefined) {
+        throw Error("Missing accountId");
+    }
+
+    if (config.clientId === undefined) {
+        throw Error("Missing clientId");
+    }
+
+    if (config.clientSecret === undefined) {
+        throw Error("Missing clientSecret");
+    }
+
+    if (config.refreshToken === undefined) {
+        throw Error("Missing refreshToken");
+    }
+
+    return config as Config;
+}
+
 module.exports = NodeHelper.create({
     start(): void {
         // TODO
@@ -21,7 +41,7 @@ module.exports = NodeHelper.create({
     async socketNotificationReceived(notification: NotificationType, payload: any): Promise<void> {
         switch (notification) {
             case "config":
-                const config = payload as Config;
+                const config = checkConfig(payload as UncheckedConfig);
                 tokenManager = new TokenManager(config);
                 fetcher = new MonzoFetcher(config.accountId);
                 await this.fetch();
