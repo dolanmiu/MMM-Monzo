@@ -26,7 +26,7 @@
 1.  Clone this repo into the `/modules` folder as usual
 2.  run `$ npm install` in `/MMM-Monzo`
 
-### Configuring
+## Configuring
 
 The final config should look something like this:
 
