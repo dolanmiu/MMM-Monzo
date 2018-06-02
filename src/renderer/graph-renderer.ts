@@ -1,13 +1,19 @@
-function findPeakAndTrough(transactions: MonzoTransaction[]): { min: number; max: number } {
+interface IMonzoTransactionExtended extends MonzoTransaction {
+    balanceAtPoint: number;
+}
+
+function findPeakAndTrough(
+    transactions: IMonzoTransactionExtended[],
+): { min: number; max: number } {
     let min = Number.MAX_VALUE;
     let max = Number.MIN_VALUE;
     for (const transaction of transactions) {
-        if (transaction.amount > max) {
-            max = transaction.amount;
+        if (transaction.balanceAtPoint > max) {
+            max = transaction.balanceAtPoint;
         }
 
-        if (transaction.amount < min) {
-            min = transaction.amount;
+        if (transaction.balanceAtPoint < min) {
+            min = transaction.balanceAtPoint;
         }
     }
 
@@ -43,14 +49,37 @@ function cartToScreen(px: number, py: number, canvas: HTMLCanvasElement): { x: n
     return { x: px, y: -py + canvas.height };
 }
 
+function addBalanceToTransactions(
+    transactions: MonzoTransaction[],
+    balance: number,
+): IMonzoTransactionExtended[] {
+    let currentBalance = balance;
+    const output: IMonzoTransactionExtended[] = [];
+
+    transactions = transactions.reverse();
+
+    for (const transaction of transactions) {
+        const newTransaction = {
+            ...transaction,
+            balanceAtPoint: currentBalance,
+        };
+
+        currentBalance -= transaction.amount;
+
+        output.push(newTransaction);
+    }
+
+    return output.reverse();
+}
+
 export default function drawGraph(
     canvas: HTMLCanvasElement,
     transactions: MonzoTransaction[],
+    balance: number,
 ): void {
     const ctx = canvas.getContext("2d");
-    const { min, max } = findPeakAndTrough(transactions);
-
-    const latsetTransactions = transactions.slice(Math.max(transactions.length - 10, 0)).reverse();
+    const latsetTransactions = addBalanceToTransactions(transactions, balance);
+    const { min, max } = findPeakAndTrough(latsetTransactions);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
@@ -60,7 +89,7 @@ export default function drawGraph(
 
     for (let i = 0; i < latsetTransactions.length; i++) {
         const transaction = latsetTransactions[i];
-        const y = getYFromTransaction(transaction.amount, canvas, min, max);
+        const y = getYFromTransaction(transaction.balanceAtPoint, canvas, min, max);
         const x = getXFromTransaction(i, latsetTransactions.length, canvas);
 
         const newXY = cartToScreen(x, y, canvas);

@@ -32,9 +32,9 @@ export class MonzoFetcher {
             },
         );
 
-        const lastTransactions = body.transactions
-            .slice(Math.max(body.transactions.length - 30, 0))
-            .reverse();
+        const lastTransactions = body.transactions.slice(
+            Math.max(body.transactions.length - 80, 0),
+        );
 
         return lastTransactions;
     }

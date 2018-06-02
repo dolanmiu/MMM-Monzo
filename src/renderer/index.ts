@@ -42,7 +42,6 @@ Module.register("MMM-Monzo", {
         const element = document.getElementById("monzoTransactions");
 
         element.innerHTML = "";
-        console.log(transactions);
         const opacityDelta = 1 / transactions.length;
         let currentOpacity = 1;
 
@@ -56,8 +55,7 @@ Module.register("MMM-Monzo", {
                     ? transaction.merchant.logo
                     : avatarUrl,
                 transaction.merchant ? transaction.merchant.name : transaction.description,
-                `${currency.symbol}${Math.abs(transaction.amount) /
-                    Math.pow(10, currency.decimalDigits)}`,
+                createFormattedPrice(currency, transaction.amount, true),
             );
             transactionElement.setAttribute("style", `opacity: ${currentOpacity}`);
             currentOpacity -= opacityDelta;
@@ -72,21 +70,26 @@ Module.register("MMM-Monzo", {
             case "monzo-data":
                 console.log(payload);
                 const currentMonzoData = payload as MonzoData;
+
+                this.setBalance(
+                    createFormattedPrice(
+                        currentMonzoData.currency,
+                        currentMonzoData.balance.balance,
+                    ),
+                );
+                this.setSpentToday(
+                    createFormattedPrice(
+                        currentMonzoData.currency,
+                        currentMonzoData.balance.spend_today,
+                        true,
+                    ),
+                );
+
                 const latsetTransactions = currentMonzoData.transactions
                     .slice(Math.max(currentMonzoData.transactions.length - 10, 0))
                     .reverse();
-
-                this.setBalance(
-                    `${currentMonzoData.currency.symbol}${currentMonzoData.balance.balance /
-                        Math.pow(10, currentMonzoData.currency.decimalDigits)}`,
-                );
-                this.setSpentToday(
-                    `${currentMonzoData.currency.symbol}${Math.abs(
-                        currentMonzoData.balance.spend_today,
-                    ) / Math.pow(10, currentMonzoData.currency.decimalDigits)}`,
-                );
                 this.setTransactions(latsetTransactions, currentMonzoData.currency);
-                drawGraph(canvas, currentMonzoData.transactions);
+                drawGraph(canvas, currentMonzoData.transactions, currentMonzoData.balance.balance);
                 break;
         }
     },
@@ -167,4 +170,20 @@ function createTransaction(logoString: string, text: string, amountString: strin
     transaction.appendChild(amount);
 
     return transaction;
+}
+
+function createFormattedPrice(
+    currency: Currency,
+    amount: number,
+    absolute: boolean = false,
+): string {
+    let priceValue = amount / Math.pow(10, currency.decimalDigits);
+
+    if (absolute) {
+        priceValue = Math.abs(priceValue);
+    }
+
+    const output = `${currency.symbol}${priceValue.toFixed(2)}`;
+
+    return output;
 }
