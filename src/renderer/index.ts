@@ -85,10 +85,10 @@ Module.register("MMM-Monzo", {
                     ),
                 );
 
-                const latsetTransactions = currentMonzoData.transactions
+                const latestTransactions = currentMonzoData.transactions
                     .slice(Math.max(currentMonzoData.transactions.length - 10, 0))
                     .reverse();
-                this.setTransactions(latsetTransactions, currentMonzoData.currency);
+                this.setTransactions(latestTransactions, currentMonzoData.currency);
                 drawGraph(canvas, currentMonzoData.transactions, currentMonzoData.balance.balance);
                 break;
         }

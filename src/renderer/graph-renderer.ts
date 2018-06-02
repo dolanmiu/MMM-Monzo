@@ -78,8 +78,8 @@ export default function drawGraph(
     balance: number,
 ): void {
     const ctx = canvas.getContext("2d");
-    const latsetTransactions = addBalanceToTransactions(transactions, balance);
-    const { min, max } = findPeakAndTrough(latsetTransactions);
+    const latestTransactions = addBalanceToTransactions(transactions, balance);
+    const { min, max } = findPeakAndTrough(latestTransactions);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
@@ -87,10 +87,10 @@ export default function drawGraph(
     // tslint:disable-next-line:no-any
     let oldXY: any = {};
 
-    for (let i = 0; i < latsetTransactions.length; i++) {
-        const transaction = latsetTransactions[i];
+    for (let i = 0; i < latestTransactions.length; i++) {
+        const transaction = latestTransactions[i];
         const y = getYFromTransaction(transaction.balanceAtPoint, canvas, min, max);
-        const x = getXFromTransaction(i, latsetTransactions.length, canvas);
+        const x = getXFromTransaction(i, latestTransactions.length, canvas);
 
         const newXY = cartToScreen(x, y, canvas);
 
