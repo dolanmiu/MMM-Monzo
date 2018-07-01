@@ -21,6 +21,8 @@
 | macOS                | ✔      | -     |
 | Windows              | ✔      | -     |
 
+Requires `node 8` or above
+
 ## Installing
 
 1.  Clone this repo into the `/modules` folder as usual
