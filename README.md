@@ -66,6 +66,7 @@ Normally everybody should have 1, but if you have multiple Monzo cards (like me)
 
 1.  run `$ npm run token-helper` inside the `/MMM-Monzo` folder
 2.  Follow the instructions
+3.  When it instructs you to go to the website, it will show an error. **This is normal**. What you need is in the URL/Address bar. 
 
 ---
 
