@@ -14,7 +14,7 @@ export class TokenManager {
         setInterval(() => {
             this.accessToken$ = this.refreshAccess();
             this.accessToken$.catch(console.error);
-        }, 21600000);
+        }, 30 * 60 * 1000);
     }
 
     private async refreshAccess(): Promise<string> {
